@@ -1,4 +1,9 @@
-import { MultiPolygon } from 'geojson';
+import { 
+    MultiPolygon,
+    FeatureCollection,
+    Feature,
+    GeoJsonProperties 
+} from 'geojson';
 
 interface Props {
     _id: number;
@@ -27,35 +32,29 @@ interface Props {
     ZBL_EXCPTN: string;
 }
 
-class Feature {
-    type: string;
+interface FeatureTO extends Feature {
+    type: 'Feature';
     properties: Props;
     geometry: MultiPolygon;
-
-    constructor(input: any) {
-        this.type = input.type;
-        this.properties = input.properties;
-        this.geometry = input.geometry
-    }
 }
 
 interface CRS {
     type: string;
-    properties: { name: string };
+    properties: GeoJsonProperties;
 }
 
-export class ZoneData {
-    type: string;
+export class ZoneData implements FeatureCollection {
+    type: 'FeatureCollection';
     crs: CRS;
-    features : Feature[];
+    features: FeatureTO[];
 
     constructor(input: any, n: number = -1) {
-        this.type = input.type;
+        this.type = 'FeatureCollection';
         this.crs = input.crs;
         const temp = [];
         let i = 0;
         for (const elem of input.features){
-            temp.push(new Feature(elem));
+            temp.push(elem);
             i = i + 1;
             if (i == n) {
                 break;

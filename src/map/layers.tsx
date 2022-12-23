@@ -5,7 +5,9 @@ import {
   LayersControl,
   LayerGroup,
   GeoJSON,
+  Popup
 } from 'react-leaflet'
+import { Typography, Divider } from "@mui/material";
 import L from 'leaflet'
 import TO from '../data/ZoningArea.json'
 import { ZoneData } from '../models/zone'
@@ -56,21 +58,27 @@ const Layers = () => {
           const output = []
           for (const elem of data.features){
             const geojson = elem.geometry
-            const name = "test";
+            const name = String(elem.properties._id);
             output.push((
               <>
                 <LayersControl.Overlay checked name={name}>
                   <LayerGroup>
-                  <GeoJSON 
-                    key={name} 
-                    data={geojson} 
-                    pathOptions={{ color: 'blue' }}
-                    eventHandlers={{
-                      mouseover: (event: L.LeafletMouseEvent) => onMouseEvent(event, 'over'),
-                      mouseout: (event: L.LeafletMouseEvent) => onMouseEvent(event, 'out'),
-                    }}
-                  >
-                  </GeoJSON>
+                    <GeoJSON key={name} data={geojson} pathOptions={{ color: 'blue' }}
+                      eventHandlers={{
+                        mouseover: (event: L.LeafletMouseEvent) => onMouseEvent(event, 'over'),
+                        mouseout: (event: L.LeafletMouseEvent) => onMouseEvent(event, 'out'),
+                      }}
+                    >
+                      <Popup>
+                        <Typography variant='subtitle2'>
+                          IDX: {name}
+                        </Typography>
+                        <Divider />
+                        <Typography variant='body2' style={{ margin: 3 }}>
+                          Density: {elem.properties.DENSITY}
+                        </Typography>
+                      </Popup>
+                    </GeoJSON>
                   </LayerGroup>
                 </LayersControl.Overlay>
               </>

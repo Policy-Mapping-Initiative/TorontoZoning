@@ -1,4 +1,4 @@
-import type { GeoJsonObject } from 'geojson';
+import { MultiPolygon } from 'geojson';
 
 interface Props {
     _id: number;
@@ -30,7 +30,7 @@ interface Props {
 class Feature {
     type: string;
     properties: Props;
-    geometry: GeoJsonObject;
+    geometry: MultiPolygon;
 
     constructor(input: any) {
         this.type = input.type;

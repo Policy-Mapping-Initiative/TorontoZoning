@@ -9,12 +9,11 @@ import {
 } from 'react-leaflet'
 import { Typography, Divider } from "@mui/material";
 import L from 'leaflet'
-import TO from '../data/ZoningArea.json'
-import { ZoneData } from '../models/zone'
+import Neighbourhoods from '../data/140NeighbourhoodsAugmented.json'
+import { NeighbourhoodData } from '../models/neighbourhoods'
 
 const Layers = () => {
-  // only load 50 zones to ease testing
-  const data = new ZoneData(TO, 50);
+  const data = new NeighbourhoodData(Neighbourhoods);
   const [borderData, setBorderData] = useState([data])
 
   const map = useMapEvents({
@@ -58,7 +57,9 @@ const Layers = () => {
           const output = []
           for (const elem of data.features){
             const geojson = elem.geometry
-            const name = String(elem.properties._id);
+            const name = String(elem.properties.AREA_NAME);
+            const percentSfh = Number(elem.properties.SINGLE_FAMILY_DWELLINGS / elem.properties.RESIDENTIAL_DWELLINGS)
+            const percentSfhStr = percentSfh.toPrecision(2)
             output.push((
               <>
                 <LayersControl.Overlay checked name={name}>
@@ -71,11 +72,17 @@ const Layers = () => {
                     >
                       <Popup>
                         <Typography variant='subtitle2'>
-                          IDX: {name}
+                          Neighbourhood: {name}
                         </Typography>
                         <Divider />
                         <Typography variant='body2' style={{ margin: 3 }}>
-                          Density: {elem.properties.DENSITY}
+                          Population: {elem.properties.POPULATION}
+                        </Typography>
+                        <Typography variant='body2' style={{ margin: 3 }}>
+                          Density: {elem.properties.DENSITY} persons / sq.km
+                        </Typography>
+                        <Typography variant='body2' style={{ margin: 3 }}>
+                          Single Family Residential Prevalence: {percentSfhStr}%
                         </Typography>
                       </Popup>
                     </GeoJSON>

@@ -5,12 +5,14 @@ import {
   LayersControl,
   LayerGroup,
   GeoJSON,
-  Popup
+  Popup,
+  Polyline
 } from 'react-leaflet'
 import { Typography, Divider } from "@mui/material";
-import L from 'leaflet'
-import TO from '../data/ZoningArea.json'
-import { ZoneData } from '../models/zone'
+import L from 'leaflet';
+import TO from '../data/ZoningArea.json';
+import { ZoneData } from '../models/zone';
+import * as _ from "lodash";
 
 const Layers = () => {
   // only load 50 zones to ease testing
@@ -38,6 +40,9 @@ const Layers = () => {
         break
     }
   }
+
+  const sampleLine: L.LatLngExpression[] = [[-79.3215041, 43.7782311], [-79.3227712, 43.7809334], [-79.3228064, 43.7810084]]
+  const coords: any[] = _.map(sampleLine, function(d: L.LatLngExpression[]) { return [d[1], d[0]]; })
 
   return (
     <>
@@ -86,6 +91,7 @@ const Layers = () => {
           }
           return output;
         })}
+        <Polyline pathOptions={{ color: 'lime' }} positions={coords} />
       </LayersControl>
     </>
   )

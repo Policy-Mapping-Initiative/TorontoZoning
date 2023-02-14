@@ -5,6 +5,13 @@ import {
     GeoJsonProperties 
 } from 'geojson';
 
+import {
+    LandUse,
+    ZoneType
+} from './enums'
+
+
+
 interface Props {
     _id: number;
     AREA_ID: number;
@@ -18,8 +25,13 @@ interface Props {
     CLASSIFICATION_CODE: string;
     OBJECTID: string;
     POPULATION: number;
+    LAND_USE: LandUse;   // Residential, Mixed Use, Non Residential ? 
+    ZONING: ZoneType;       // See Simplfied Zones
     DENSITY: number;
     LAND_AREA: number;
+    RESIDENTIAL_LAND_AREA: number;
+    NON_RESIDENTIAL_LAND_AREA: number;
+    ZONE_LAND_AREA: number; // This is the land area under the particular zone
     RESIDENTIAL_DWELLINGS: number;
     SINGLE_FAMILY_DWELLINGS: number;
     MID_HIGH_RISE_APARTMENTS: number;

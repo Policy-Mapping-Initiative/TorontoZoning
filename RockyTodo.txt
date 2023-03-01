@@ -1,0 +1,13 @@
+1.Document my in house GeoJson Format, go and put it into a proper class. (can do later)
+
+2. Subway Stations (Eventually frequent busses and street cars),
+
+3. Make sure there are three files. 1. Residential Land, 2. Non Residential Land, 3. Open Space
+
+4. Give each neighbourhood ID
+
+5. MAKE SURE TOTAL RESIDENTIAL AREA OF NEIGHBOURHOOD
+
+== NOT ESSENTIAL FOR SAMI ==
+
+6. Document the data process

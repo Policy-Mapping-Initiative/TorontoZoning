@@ -4,62 +4,53 @@ import {
     Feature,
     GeoJsonProperties 
 } from 'geojson';
+import { LandUse, ZoneType } from './enums';
+import { Neighbourhood } from './neighbourhood';
 
 interface Props {
-    _id: number;
-    GEN_ZONE: string;
-    ZN_ZONE: string;
-    ZN_HOLDING: string;
-    HOLDING_ID: string;
-    FRONTAGE: number;
-    ZN_AREA: number;
-    UNITS: string;
-    DENSITY: string;
-    COVERAGE: string;
-    FSI_TOTAL: number;
-    PRCNT_COMM: number;
-    PRCNT_RES: number;
-    PRCNT_EMMP: number;
-    PRCNT_OFFC: number;
-    ZN_EXCPTN: string;
-    EXCPTN_NO: number;
-    STAND_SET: number;
-    ZN_STATUS: number;
-    ZN_STRING: string;
-    AREA_UNITS: string;
-    ZBL_CHAPT: number;
-    ZBL_SECTN: number;
-    ZBL_EXCPTN: string;
+    neighbourhoodId: number,
+    area: number,
+    zoneType: ZoneType,
+    landUse: LandUse,
+    uuid: String
 }
 
-interface FeatureTO extends Feature {
+export class Zone implements Feature {
     type: 'Feature';
     properties: Props;
     geometry: MultiPolygon;
-}
+    neighbourhood: Neighbourhood;
+    imputedPopulation: Map<Number, Number>;
 
-interface CRS {
-    type: string;
-    properties: GeoJsonProperties;
-}
+    constructor(feature: any) {
+        
+        this.properties = feature.properties;
+        this.geometry = feature.geometry;
+        this.type = "Feature";
 
-export class ZoneData implements FeatureCollection {
-    type: 'FeatureCollection';
-    crs: CRS;
-    features: FeatureTO[];
 
-    constructor(input: any, n: number = -1) {
-        this.type = 'FeatureCollection';
-        this.crs = input.crs;
-        const temp = [];
-        let i = 0;
-        for (const elem of input.features){
-            temp.push(elem);
-            i = i + 1;
-            if (i == n) {
-                break;
-            }
-        }
-        this.features = temp;
+        // TODO: Figure out where to store neighbourhoods stored by id so we can fetch a reference.
+        this.neighbourhood = null; 
+        this.imputedPopulation = new Map(); 
+
+        // TODO: Make this more evergreen
+        this.imputedPopulation.set(2023, (this.neighbourhood.density * this.area ))
+
+    }
+
+    get area() { 
+        return this.properties.area;
+    }
+
+    get zoneTpe() { 
+        return this.properties.zoneType;
+    }
+
+    get landUse() { 
+        return this.properties.landUse;
+    }
+
+    get uuid() { 
+        return this.properties.uuid;
     }
 }

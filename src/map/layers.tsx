@@ -10,7 +10,7 @@ import {
 import { Typography, Divider } from "@mui/material";
 import L from 'leaflet'
 import Neighbourhoods from '../data/140NeighbourhoodsAugmented.json'
-import { NeighbourhoodData } from '../models/neighbourhoods'
+import { NeighbourhoodData } from '../models/neighbourhoodCollection'
 
 const Layers = () => {
   const data = new NeighbourhoodData(Neighbourhoods);

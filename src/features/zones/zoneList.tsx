@@ -1,15 +1,14 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { getZoneCounter, getAllZoneData } from '../../store';
+import { getZoneCounter, getAllZoneData, useAppDispatch, useAppSelector } from '../../hooks';
 import { addZone } from './zoneSlice';
 
 export const CreateZoneList = () => {
-  const dispatch = useDispatch();
-  const zoneCount = useSelector(getZoneCounter);
-  const zoneData = useSelector(getAllZoneData);
+  const dispatch = useAppDispatch();
+  const zoneCount = useAppSelector(getZoneCounter);
+  const zoneData = useAppSelector(getAllZoneData);
 
   for (const elem of zoneData.features) {
     if (elem.properties._id < zoneCount) {
-      dispatch({ type: addZone.type, payload: elem });
+      dispatch(addZone(elem));
     } else {
       break;
     }

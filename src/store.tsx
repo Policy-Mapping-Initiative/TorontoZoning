@@ -6,12 +6,9 @@ const rootReducer = combineReducers({
   zone: zoneSlice.reducer,
   counter: counterSlice.reducer,
 });
-type IRootState = ReturnType<typeof rootReducer>;
 
-export const getZoneCounter = (state: IRootState) => state.counter.zoneCount;
-export const getAllZoneData = (state: IRootState) => state.zone.data;
-export const getSelectedZones = (state: IRootState) => state.zone.selectedZones;
-
+export type RootState = ReturnType<typeof rootReducer>;
 export const store = configureStore({
   reducer: rootReducer,
 });
+export type AppDispatch = typeof store.dispatch;

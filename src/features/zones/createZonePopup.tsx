@@ -1,11 +1,11 @@
 import { LayersControl, LayerGroup, GeoJSON, Popup } from 'react-leaflet';
 import { Typography, Divider } from '@mui/material';
 import { onMouseEvent } from '../../utils';
-import { useSelector } from 'react-redux';
-import { getSelectedZones } from '../../store';
+import { getSelectedZones } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 
 export const createPopup = () => {
-  const selectedZones = useSelector(getSelectedZones);
+  const selectedZones = useAppSelector(getSelectedZones);
   const output = [];
   for (const elem of selectedZones) {
     const name = String(elem.properties._id);

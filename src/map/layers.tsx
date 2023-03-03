@@ -1,43 +1,10 @@
-import React, { useState } from 'react'
-import { 
-  useMapEvents,
-  TileLayer,
-  LayersControl,
-  LayerGroup,
-  GeoJSON,
-  Popup
-} from 'react-leaflet'
-import { Typography, Divider } from "@mui/material";
-import L from 'leaflet'
-import TO from '../data/ZoningArea.json'
-import { ZoneData } from '../models/zone'
+// import React, { useState } from 'react'
+import { TileLayer, LayersControl } from 'react-leaflet';
+import { CreateZoneList } from '../features/zones/zoneList';
+import { createPopup } from '../features/zones/createZonePopup';
 
 const Layers = () => {
-  // only load 50 zones to ease testing
-  const data = new ZoneData(TO, 50);
-  const [borderData, setBorderData] = useState([data])
-
-  const map = useMapEvents({
-    zoomend: () => {
-      console.log(map.getZoom())
-    },
-    moveend: () => {
-      console.log(map.getBounds())
-    }
-  })
-
-  const onMouseEvent = (event: L.LeafletMouseEvent, type: string) => {
-    switch (type) {
-      case 'over':
-        event.target.setStyle({ fillOpacity: 0.5 })
-        break
-      case 'out':
-        event.target.setStyle({ fillOpacity: 0.0 })
-        break
-      default:
-        break
-    }
-  }
+  CreateZoneList();
 
   return (
     <>
@@ -54,41 +21,10 @@ const Layers = () => {
             url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
           />
         </LayersControl.BaseLayer>
-        {borderData.map((data) => {
-          const output = []
-          for (const elem of data.features){
-            const geojson = elem.geometry
-            const name = String(elem.properties._id);
-            output.push((
-              <>
-                <LayersControl.Overlay checked name={name}>
-                  <LayerGroup>
-                    <GeoJSON key={name} data={geojson} pathOptions={{ color: 'blue' }}
-                      eventHandlers={{
-                        mouseover: (event: L.LeafletMouseEvent) => onMouseEvent(event, 'over'),
-                        mouseout: (event: L.LeafletMouseEvent) => onMouseEvent(event, 'out'),
-                      }}
-                    >
-                      <Popup>
-                        <Typography variant='subtitle2'>
-                          IDX: {name}
-                        </Typography>
-                        <Divider />
-                        <Typography variant='body2' style={{ margin: 3 }}>
-                          Density: {elem.properties.DENSITY}
-                        </Typography>
-                      </Popup>
-                    </GeoJSON>
-                  </LayerGroup>
-                </LayersControl.Overlay>
-              </>
-            ))
-          }
-          return output;
-        })}
+        {createPopup()}
       </LayersControl>
     </>
-  )
-}
+  );
+};
 
-export default Layers
+export default Layers;

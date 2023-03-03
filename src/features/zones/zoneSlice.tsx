@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import TO from '../../data/ZoningArea.json';
-import { ZoneDataState, FeatureTO } from '../../models/zone';
+import { ZoneData, FeatureTO } from '../../models/zone';
 
 const initialState = {
-  data: TO as ZoneDataState,
+  data: TO as ZoneData,
   selectedZones: [] as FeatureTO[],
 };
 

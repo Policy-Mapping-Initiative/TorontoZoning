@@ -1,4 +1,4 @@
-import { MultiPolygon, FeatureCollection, Feature, GeoJsonProperties } from 'geojson';
+import { MultiPolygon, Feature, GeoJsonProperties } from 'geojson';
 
 interface Props {
   _id: number;
@@ -38,29 +38,8 @@ interface CRS {
   properties: GeoJsonProperties;
 }
 
-export interface ZoneDataState {
+export interface ZoneData {
   type: 'FeatureCollection';
   crs: CRS;
   features: FeatureTO[];
-}
-
-export class ZoneData implements FeatureCollection {
-  type: 'FeatureCollection';
-  crs: CRS;
-  features: FeatureTO[];
-
-  constructor(input: any, n: number = -1) {
-    this.type = 'FeatureCollection';
-    this.crs = input.crs;
-    const temp = [];
-    let i = 0;
-    for (const elem of input.features) {
-      temp.push(elem);
-      i = i + 1;
-      if (i == n) {
-        break;
-      }
-    }
-    this.features = temp;
-  }
 }

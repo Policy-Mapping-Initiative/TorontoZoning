@@ -1,4 +1,4 @@
-import { getZoneCounter, getAllZoneData, useAppDispatch, useAppSelector } from '../../hooks';
+import { getZoneCounter, getAllZoneData, useAppDispatch, useAppSelector } from '../../utils/hooks';
 import { addZone } from './zoneSlice';
 
 export const CreateZoneList = () => {

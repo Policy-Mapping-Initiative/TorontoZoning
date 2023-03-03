@@ -1,8 +1,8 @@
 import { LayersControl, LayerGroup, GeoJSON, Popup } from 'react-leaflet';
 import { Typography, Divider } from '@mui/material';
 import { onMouseEvent } from '../../utils';
-import { getSelectedZones } from '../../hooks';
-import { useAppSelector } from '../../hooks';
+import { getSelectedZones } from '../../utils/hooks';
+import { useAppSelector } from '../../utils/hooks';
 
 export const createPopup = () => {
   const selectedZones = useAppSelector(getSelectedZones);

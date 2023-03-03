@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import TO from '../../data/ZoningArea.json';
-import { ZoneData, FeatureTO } from '../../models/zone';
+import { ZoneData, FeatureTO } from '../../interfaces/zone';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface ZoneState {

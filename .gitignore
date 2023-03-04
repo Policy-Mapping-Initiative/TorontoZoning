@@ -37,3 +37,5 @@ lerna-debug.log*
 
 # Data
 data/
+# Local Netlify folder
+.netlify

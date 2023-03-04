@@ -1,4 +1,4 @@
-import { MultiPolygon, Feature, GeoJsonProperties } from 'geojson';
+import { MultiPolygon, Feature } from 'geojson';
 
 interface Props {
   _id: number;

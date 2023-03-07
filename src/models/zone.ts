@@ -19,7 +19,7 @@ export class Zone implements Feature {
     type: 'Feature';
     properties: Props;
     geometry: MultiPolygon;
-    neighbourhood: Neighbourhood;
+    // neighbourhood: Neighbourhood;
     imputedPopulation: Map<Number, Number>;
 
     constructor(feature: any) {
@@ -30,7 +30,7 @@ export class Zone implements Feature {
 
 
         // TODO: Figure out where to store neighbourhoods stored by id so we can fetch a reference.
-        this.neighbourhood = null; 
+        // this.neighbourhood = null; 
         this.imputedPopulation = new Map(); 
 
         // TODO: Make this more evergreen

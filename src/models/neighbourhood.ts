@@ -8,7 +8,7 @@ import {
 import {Zone} from './zone'
 
 interface Props {
-    name: String,
+    name: string,
     neighbourhoodId: number,
     area: number,
     population: number,

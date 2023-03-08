@@ -39,3 +39,4 @@ lerna-debug.log*
 pre-comp/package-lock.json
 */node_modules
 
+.netlify

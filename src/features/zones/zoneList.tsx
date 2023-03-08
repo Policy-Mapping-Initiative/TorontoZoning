@@ -3,14 +3,14 @@ import { addZone } from './zoneSlice';
 
 export const CreateZoneList = () => {
   const dispatch = useAppDispatch();
-  const zoneCount = useAppSelector(getZoneCounter);
+  let zoneCount = useAppSelector(getZoneCounter);
   const zoneData = useAppSelector(getAllZoneData);
 
-  for (const elem of zoneData.features) {
-    if (elem.properties._id < zoneCount) {
-      dispatch(addZone(elem));
-    } else {
-      break;
+    if (zoneCount === 0 ) {
+      zoneCount = zoneData.features.length;
     }
-  }
+
+    for (let i = 0; i < zoneCount; i++) {
+      dispatch(addZone(zoneData.features[i]));
+    }
 };

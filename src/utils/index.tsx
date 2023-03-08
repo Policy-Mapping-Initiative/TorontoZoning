@@ -6,7 +6,7 @@ export const onMouseEvent = (event: L.LeafletMouseEvent, type: string) => {
       event.target.setStyle({ fillOpacity: 0.5 });
       break;
     case 'out':
-      event.target.setStyle({ fillOpacity: 0.0 });
+      event.target.setStyle({ fillOpacity: 0.2 });
       break;
     default:
       break;

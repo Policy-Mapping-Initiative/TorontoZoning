@@ -12,7 +12,7 @@ interface Props {
     area: number,
     zoneType: ZoneType,
     landUse: LandUse,
-    uuid: String
+    uuid: string
 }
 
 export class Zone implements Feature {
@@ -34,7 +34,7 @@ export class Zone implements Feature {
         this.imputedPopulation = new Map(); 
 
         // TODO: Make this more evergreen
-        this.imputedPopulation.set(2023, (this.neighbourhood.density * this.area ))
+        // this.imputedPopulation.set(2023, (this.neighbourhood.density * this.area ))
 
     }
 
@@ -42,7 +42,7 @@ export class Zone implements Feature {
         return this.properties.area;
     }
 
-    get zoneTpe() { 
+    get zoneType() { 
         return this.properties.zoneType;
     }
 

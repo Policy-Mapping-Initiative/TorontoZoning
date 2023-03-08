@@ -1,10 +1,10 @@
-// import React, { useState } from 'react'
 import { TileLayer, LayersControl } from 'react-leaflet';
-import { CreateZoneList } from '../features/zones/zoneList';
-import { createPopup } from '../features/zones/createZonePopup';
+// import { CreateZoneList } from '../features/zones/zoneList';
+// import { createPopup } from '../features/zones/createZonePopup';
+import { createPopup } from '../features/neighbourhoods/createNeighbourhoodPopup';
 
 const Layers = () => {
-  CreateZoneList();
+  // CreateZoneList();
 
   return (
     <>

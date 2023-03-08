@@ -6,7 +6,7 @@ let ROSETTA_STONE = {
     "POPULATION": "population",
     "LAND_AREA": "area",
     "RESIDENTIAL_DWELLINGS": "residenceCount",
-    "SINGLE_FAMILY_DWELINGS": "singleFamilyCount",
+    "SINGLE_FAMILY_DWELLINGS": "singleFamilyCount",
     "MID_HIGH_RISE_APARTMENTS": "midHighRiseCount",
     "OTHER_ATTACHED_DWELLINGS": "otherAttachedCount",
     "SEMI_DETACHED_DWELLINGS": "semiDetachedCount",
@@ -18,9 +18,8 @@ let ROSETTA_STONE = {
 
 function main() {
     let neighbourhoods = JSON.parse(fs.readFileSync('../geojson/140NeighbourhoodsAugmented.geojson'));
-    neighbourhoods = neighbourhoods.features;
 
-    for (const neighbourhood of neighbourhoods)  {
+    for (const neighbourhood of neighbourhoods.features)  {
         let newProperties = {}
         let oldProperties = Object.assign({}, neighbourhood.properties);    // Probably unnecessary
 

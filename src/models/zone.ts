@@ -1,45 +1,56 @@
-import { MultiPolygon, Feature, GeoJsonProperties } from 'geojson';
+import { 
+    MultiPolygon,
+    FeatureCollection,
+    Feature,
+    GeoJsonProperties 
+} from 'geojson';
+import { LandUse, ZoneType } from './enums';
+import { Neighbourhood } from './neighbourhood';
 
 interface Props {
-  _id: number;
-  GEN_ZONE: string;
-  ZN_ZONE: string;
-  ZN_HOLDING: string;
-  HOLDING_ID: string;
-  FRONTAGE: number;
-  ZN_AREA: number;
-  UNITS: string;
-  DENSITY: string;
-  COVERAGE: string;
-  FSI_TOTAL: number;
-  PRCNT_COMM: number;
-  PRCNT_RES: number;
-  PRCNT_EMMP: number;
-  PRCNT_OFFC: number;
-  ZN_EXCPTN: string;
-  EXCPTN_NO: number;
-  STAND_SET: number;
-  ZN_STATUS: number;
-  ZN_STRING: string;
-  AREA_UNITS: string;
-  ZBL_CHAPT: number;
-  ZBL_SECTN: number;
-  ZBL_EXCPTN: string;
+    neighbourhoodId: number,
+    area: number,
+    zoneType: ZoneType,
+    landUse: LandUse,
+    uuid: string
 }
 
-export interface FeatureTO extends Feature {
-  type: 'Feature';
-  properties: Props;
-  geometry: MultiPolygon;
-}
+export class Zone implements Feature {
+    type: 'Feature';
+    properties: Props;
+    geometry: MultiPolygon;
+    // neighbourhood: Neighbourhood;
+    imputedPopulation: Map<Number, Number>;
 
-interface CRS {
-  type: string;
-  properties: GeoJsonProperties;
-}
+    constructor(feature: any) {
+        
+        this.properties = feature.properties;
+        this.geometry = feature.geometry;
+        this.type = "Feature";
 
-export interface ZoneData {
-  type: 'FeatureCollection';
-  crs: CRS;
-  features: FeatureTO[];
+
+        // TODO: Figure out where to store neighbourhoods stored by id so we can fetch a reference.
+        // this.neighbourhood = null; 
+        this.imputedPopulation = new Map(); 
+
+        // TODO: Make this more evergreen
+        // this.imputedPopulation.set(2023, (this.neighbourhood.density * this.area ))
+
+    }
+
+    get area() { 
+        return this.properties.area;
+    }
+
+    get zoneType() { 
+        return this.properties.zoneType;
+    }
+
+    get landUse() { 
+        return this.properties.landUse;
+    }
+
+    get uuid() { 
+        return this.properties.uuid;
+    }
 }

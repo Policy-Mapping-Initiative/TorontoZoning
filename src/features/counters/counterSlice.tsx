@@ -4,7 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 interface CounterState {
   zoneCount: number;
 }
-const initialState = { zoneCount: 50 } as CounterState;
+const initialState = { zoneCount: 0 } as CounterState;
 
 export const counterSlice = createSlice({
   name: 'counter',

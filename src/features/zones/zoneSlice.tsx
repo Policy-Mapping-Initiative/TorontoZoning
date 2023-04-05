@@ -1,23 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
-import TO from '../../data/ZoningArea.json';
-import { ZoneData, FeatureTO } from '../../models/zone';
+import zones from '../../data/zones.json';
+import { Zone } from '../../models/zone';
+import { ZoneCollection } from '../../models/zoneCollection';
+
+
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface ZoneState {
-  data: ZoneData;
-  selectedZones: FeatureTO[];
+  data: ZoneCollection;
+  selectedZones: Zone[];
 }
 
 const initialState = {
-  data: TO as ZoneData,
-  selectedZones: [] as FeatureTO[],
+  data: new ZoneCollection(zones),
+  selectedZones: [] as Zone[],
 } as ZoneState;
 
 export const zoneSlice = createSlice({
   name: 'zoneData',
   initialState: initialState,
   reducers: {
-    addZone: (state, action: PayloadAction<FeatureTO>) => {
+    addZone: (state, action: PayloadAction<Zone>) => {
       state.selectedZones.push(action.payload);
     },
   },
